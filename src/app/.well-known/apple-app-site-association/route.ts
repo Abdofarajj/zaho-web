@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 const appleTeamId = process.env.APPLE_TEAM_ID;
 const bundleId = process.env.NEXT_PUBLIC_BUNDLE_IDENTIFIER;
 const appID = `${appleTeamId}.${bundleId}`;

@@ -1,8 +1,12 @@
+'use client';
+
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle } from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu } from "lucide-react";
+import { Menu, Languages } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import i18n from "@/i18n";
 
 type Props = {
   items: {
@@ -13,10 +17,16 @@ type Props = {
 };
 
 export function MobileNav({ items, className }: Props) {
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'ar' : 'en';
+    i18n.changeLanguage(newLang);
+  };
+
   return (
     <nav className={cn("flex w-full max-w-7xl items-center justify-between gap-4", className)}>
       <Link href="/">
-        <Image src="/logo.svg" alt="logo" width={86} height={26} />
+        <Image src="/zaho-logo.png" alt="logo" width={86} height={26} />
       </Link>
       <Drawer direction="top">
         <DrawerTrigger className="relative -m-2 cursor-pointer p-2">
@@ -30,6 +40,10 @@ export function MobileNav({ items, className }: Props) {
               {item.label}
             </Link>
           ))}
+          <Button variant="outline" onClick={toggleLanguage} className="flex items-center gap-2">
+            <Languages className="h-4 w-4" />
+            {/* {t('nav.language')} */}
+          </Button>
         </DrawerContent>
       </Drawer>
     </nav>

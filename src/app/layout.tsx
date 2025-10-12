@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "sonner";
+import ClientLayout from "./client-layout";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,8 +9,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Paddle Web Payments Starter",
-  description: "A vercel template for taking web payments for mobile apps with Paddle",
+  title: "Zaho-Electronic Payment Services",
+  icons: {
+    icon: '/zaho-logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -21,8 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        {children}
-        <Toaster />
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

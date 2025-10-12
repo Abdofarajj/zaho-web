@@ -1,8 +1,13 @@
+'use client';
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
+import i18n from '@/i18n';
 
 function AccordionItemFAQs(props: React.ComponentProps<typeof AccordionItem>) {
   return (
@@ -30,52 +35,74 @@ function AccordionContentFAQs(props: React.ComponentProps<typeof AccordionConten
 }
 
 export function FAQs() {
+  const { t, ready } = useTranslation('common');
+  const [isRTL, setIsRTL] = useState(false);
+
+  useEffect(() => {
+    setIsRTL(i18n.language === 'ar');
+  }, []);
+
+  useEffect(() => {
+    const handleLanguageChange = (lng: string) => {
+      setIsRTL(lng === 'ar');
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, []);
+
+  if (!ready) {
+    return <div></div>;
+  }
+
   return (
-    <div className="mx-auto grid max-w-6xl gap-6 px-6 py-14 md:grid-cols-2 md:gap-14 md:px-10 md:py-25">
+    <div className={`mx-auto grid max-w-6xl gap-6 px-6 py-14 md:grid-cols-2 md:gap-14 md:px-10 md:py-25 ${isRTL ? 'text-right' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="flex w-full flex-col gap-6">
         <Badge variant="secondary" className="mb-2 uppercase">
           FAQ
         </Badge>
         <h2 className="text-3xl leading-[1.1] font-medium tracking-tight sm:text-5xl">
-          Frequently
+          {t('termsAndConditions.faqs.title')}
           <br />
-          Asked <span className="text-muted-foreground">Questions</span>
+          <span className="text-muted-foreground">{t('termsAndConditions.faqs.subtitle')}</span>
         </h2>
         <p className="max-w-lg text-xs leading-6 tracking-tight sm:text-base">
-          Get answers to commonly asked questions.
+          {t('termsAndConditions.faqs.description')}
         </p>
         <Button className="w-fit" size="lg" asChild>
-          <Link href="/pricing">Get Started</Link>
+          <Link href="#">{t('termsAndConditions.faqs.getStarted')}</Link>
         </Button>
       </div>
-      <Accordion type="single" collapsible defaultValue="branding" className="grid w-full gap-4">
-        <AccordionItemFAQs value="branding">
-          <AccordionTriggerFAQs>Will my app show your branding anywhere?</AccordionTriggerFAQs>
+      <Accordion type="single" collapsible defaultValue="what-is-hawelli" className="grid w-full gap-4">
+        <AccordionItemFAQs value="what-is-hawelli">
+          <AccordionTriggerFAQs>{t('termsAndConditions.faqs.whatIsHawelli.question')}</AccordionTriggerFAQs>
           <AccordionContentFAQs>
             <p>
-              Never. Your app will be fully white-labeled with your own name, logo, and design. We stay completely
-              invisible.
+              {t('termsAndConditions.faqs.whatIsHawelli.answer')}
             </p>
           </AccordionContentFAQs>
         </AccordionItemFAQs>
-        <AccordionItemFAQs value="skills">
-          <AccordionTriggerFAQs>Do I need technical skills to use Acme?</AccordionTriggerFAQs>
+        <AccordionItemFAQs value="services">
+          <AccordionTriggerFAQs>{t('termsAndConditions.faqs.services.question')}</AccordionTriggerFAQs>
           <AccordionContentFAQs>
             <p>
-              No. We handle all the technical setup for you. You can focus on your business while we handle the rest.
+              {t('termsAndConditions.faqs.services.answer')}
             </p>
           </AccordionContentFAQs>
         </AccordionItemFAQs>
-        <AccordionItemFAQs value="devices">
-          <AccordionTriggerFAQs>Will my app work on all devices?</AccordionTriggerFAQs>
+        <AccordionItemFAQs value="who-can-use">
+          <AccordionTriggerFAQs>{t('termsAndConditions.faqs.whoCanUse.question')}</AccordionTriggerFAQs>
           <AccordionContentFAQs>
-            <p>Yes. Our app is designed to work on all devices, including iOS and Android.</p>
+            <p>{t('termsAndConditions.faqs.whoCanUse.answer')}</p>
           </AccordionContentFAQs>
         </AccordionItemFAQs>
-        <AccordionItemFAQs value="notifcations">
-          <AccordionTriggerFAQs>Can I send notifications and updates to users?</AccordionTriggerFAQs>
+        <AccordionItemFAQs value="security">
+          <AccordionTriggerFAQs>{t('termsAndConditions.faqs.security.question')}</AccordionTriggerFAQs>
           <AccordionContentFAQs>
-            <p>Yes. You can send notifications and updates to users through our app.</p>
+            <p>{t('termsAndConditions.faqs.security.answer')}</p>
           </AccordionContentFAQs>
         </AccordionItemFAQs>
       </Accordion>

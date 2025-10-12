@@ -1,7 +1,10 @@
+'use client';
+
 import { FeaturesCarousel } from "@/components/features/features-carousel";
 import { FeaturesTabs } from "@/components/features/features-tabs";
 import { Badge } from "@/components/ui/badge";
-import { ActivityIcon, ChartNoAxesColumnIcon, SlidersIcon, ZapIcon } from "lucide-react";
+import { DollarSignIcon, ShieldIcon, BarChartIcon, CodeIcon } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 export type Feature = {
   icon: React.ReactNode;
@@ -10,45 +13,45 @@ export type Feature = {
   image: string;
 };
 
-const features = [
-  {
-    icon: <SlidersIcon size={20} />,
-    title: "Full Brand Control",
-    description: "Make it yours—customize logos, colors, domains, and more.",
-    image: "/app-image-1.png",
-  },
-  {
-    icon: <ZapIcon size={20} />,
-    title: "Fast, Native Performance",
-    description: "Built with native tech for fast, smooth performance.",
-    image: "/app-image-1.png",
-  },
-  {
-    icon: <ActivityIcon size={20} />,
-    title: "Push Notifications",
-    description: "Engage users with real-time updates and alerts.",
-    image: "/app-image-1.png",
-  },
-  {
-    icon: <ChartNoAxesColumnIcon size={20} />,
-    title: "Built-in Analytics",
-    description: "Monitor activity and performance with live data.",
-    image: "/app-image-1.png",
-  },
-] satisfies Feature[];
-
 export function Features() {
+  const { t } = useTranslation('common');
+
+  const features = [
+    {
+      icon: <DollarSignIcon size={20} />,
+      title: t('features.customFinancialSolutions.title'),
+      description: t('features.customFinancialSolutions.description'),
+      image: "/app-image-1.png",
+    },
+    {
+      icon: <ShieldIcon size={20} />,
+      title: t('features.paymentGatewayBankIntegration.title'),
+      description: t('features.paymentGatewayBankIntegration.description'),
+      image: "/app-image-1.png",
+    },
+    {
+      icon: <BarChartIcon size={20} />,
+      title: t('features.financialManagementTools.title'),
+      description: t('features.financialManagementTools.description'),
+      image: "/app-image-1.png",
+    },
+    {
+      icon: <CodeIcon size={20} />,
+      title: t('features.paymentOperationsApis.title'),
+      description: t('features.paymentOperationsApis.description'),
+      image: "/app-image-1.png",
+    },
+  ] satisfies Feature[];
   return (
-    <div id="features" className="flex w-full flex-col items-center gap-6 px-6 py-14 md:px-10 md:py-25">
+    <div id="features" className="flex w-full flex-col items-center gap-6 px-6 py-14 pb-20 md:px-10 md:py-25 md:pb-32">
       <Badge variant="secondary" className="uppercase">
-        Features
+        {t('features.badge')}
       </Badge>
       <h2 className="text-center text-3xl leading-[1.1] font-medium tracking-tight sm:text-5xl">
-        Discover our<div className="text-muted-foreground">exceptional features</div>
+        {t('features.title')}<div className="text-muted-foreground">{t('features.titleHighlight')}</div>
       </h2>
       <p className="mb-3 max-w-lg text-center leading-6 tracking-tight sm:text-xl lg:mb-8">
-        We&apos;ve built the ultimate white-label app platform so you can focus on growing your brand - not building
-        tech
+        {t('features.description')}
       </p>
       <FeaturesCarousel features={features} className="block lg:hidden" />
       <FeaturesTabs features={features} className="hidden lg:block" />
