@@ -1,0 +1,11 @@
+---
+deployment:
+  tasks:
+    # Set the deployment path to your public_html
+    - export DEPLOYPATH=/home/zaho/public_html/
+    
+    # Copy all files from the repository to public_html
+    - /bin/cp -R /home/zaho/repositories/zaho-web/* $DEPLOYPATH
+    
+    # Optional: remove .git directory from public_html to avoid issues
+    - /bin/rm -rf $DEPLOYPATH/.git
