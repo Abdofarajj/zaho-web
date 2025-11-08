@@ -11,7 +11,8 @@ import i18n from "@/i18n";
 type Props = {
   items: {
     label: string;
-    href: string;
+    href?: string;
+    onClick?: () => void;
   }[];
   className?: string;
 };
@@ -36,9 +37,15 @@ export function MobileNav({ items, className }: Props) {
         <DrawerContent className="flex flex-col gap-4 p-8">
           <DrawerTitle className="sr-only">Menu</DrawerTitle>
           {items.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
+            item.onClick ? (
+              <button key={item.label} onClick={item.onClick} className="text-left">
+                {item.label}
+              </button>
+            ) : (
+              <Link key={item.label} href={item.href!}>
+                {item.label}
+              </Link>
+            )
           ))}
           <Button variant="outline" onClick={toggleLanguage} className="flex items-center gap-2">
             <Languages className="h-4 w-4" />

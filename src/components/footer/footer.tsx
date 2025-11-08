@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
 import { FooterBlur } from "@/components/footer/footer-blur";
-import { LinkedInIcon, GithubIcon } from "@/components/footer/icons";
+import { LinkedInIcon, GithubIcon, EmailIcon } from "@/components/footer/icons";
 import Link from "next/link";
 import Image from "next/image";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   const links = [
     {
-      title: t('footer.hawelli'),
+      title: t("footer.hawelli"),
       links: [
         {
-          label: t('footer.downloadApp'),
+          label: t("footer.downloadApp"),
           href: "https://apps.apple.com/",
           title: "Download the app from the App Store",
         },
         {
-          label: t('footer.features'),
+          label: t("footer.features"),
           href: "/#features",
           title: "See our features",
         },
@@ -31,30 +31,30 @@ export function Footer() {
       ],
     },
     {
-      title: t('footer.products'),
+      title: t("footer.products"),
       links: [
         {
-          label: t('footer.forAndroid'),
+          label: t("footer.forAndroid"),
           href: "https://play.google.com/store",
           title: "Download on Android",
         },
         {
-          label: t('footer.forIPhone'),
+          label: t("footer.forIPhone"),
           href: "https://apps.apple.com/",
           title: "Download on iOS",
         },
       ],
     },
     {
-      title: t('footer.company'),
+      title: t("footer.company"),
       links: [
         {
-          label: t('footer.termsAndConditions'),
+          label: t("footer.termsAndConditions"),
           href: "/terms-and-conditions",
           title: "Read our Terms & Conditions",
         },
         {
-          label: t('footer.privacyPolicy'),
+          label: t("footer.privacyPolicy"),
           href: "/privacy-policy",
           title: "Read our Privacy Policy",
         },
@@ -66,7 +66,7 @@ export function Footer() {
       ],
     },
     {
-      title: t('footer.followUs'),
+      title: t("footer.followUs"),
       links: [
         // {
         //   label: (
@@ -126,6 +126,14 @@ export function Footer() {
             </ul>
           </div>
         ))}
+      </div>
+      <div className="text-muted-foreground mx-auto mt-8 text-center">
+        Developed by Abdualrahman Faraj ©
+        <br />
+        <div className="mt-2 flex items-center justify-center gap-2">
+          <span>Abdualrahman.farag@zaho.ly</span>
+          <EmailIcon className="h-4 w-4" />
+        </div>
       </div>
     </footer>
   );

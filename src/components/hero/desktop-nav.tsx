@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
@@ -17,7 +16,8 @@ import { useTranslation } from 'react-i18next';
 type Props = {
   items: {
     label: string;
-    href: string;
+    href?: string;
+    onClick?: () => void;
   }[];
   className?: string;
 };
@@ -38,8 +38,22 @@ export function DesktopNav({ items, className }: Props) {
       <NavigationMenu className="absolute left-1/2 transform -translate-x-1/2">
         <NavigationMenuList className="gap-8">
           {items.map((item) => (
-            <NavigationMenuItem key={item.href}>
-              <NavigationMenuLink href={item.href}>{item.label}</NavigationMenuLink>
+            <NavigationMenuItem key={item.label}>
+              {item.onClick ? (
+                <button
+                  onClick={item.onClick}
+                  className="hover:bg-muted/50 hover:text-foreground focus:bg-muted focus:text-foreground focus-visible:ring-ring/50 flex flex-col gap-1 rounded-sm px-3 py-2 text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 cursor-pointer"
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <Link
+                  href={item.href!}
+                  className="hover:bg-muted/50 hover:text-foreground focus:bg-muted focus:text-foreground focus-visible:ring-ring/50 flex flex-col gap-1 rounded-sm px-3 py-2 text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1"
+                >
+                  {item.label}
+                </Link>
+              )}
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>

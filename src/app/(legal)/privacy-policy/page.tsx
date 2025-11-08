@@ -3,8 +3,12 @@
 import { useTranslation } from 'react-i18next';
 
 export default function PrivacyPolicy() {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n, ready } = useTranslation('common');
   const isRTL = i18n.dir(i18n.language) === 'rtl';
+
+  if (!ready) {
+    return <div></div>;
+  }
 
   return (
     <div className="mt-20 max-w-4xl mx-auto px-4" dir={isRTL ? 'rtl' : 'ltr'}>
