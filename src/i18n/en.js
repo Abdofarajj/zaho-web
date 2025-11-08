@@ -29,7 +29,7 @@ const translations = {
         badge: "Features",
         title: "Discover our",
         titleHighlight: "exceptional features",
-        description: "We've built the ultimate white-label app platform so you can focus on growing your brand - not building tech",
+        description: "We've built Hawelli, a complete e-payment solution so you can focus on growing your business instead of building the technology",
         customFinancialSolutions: {
             title: "Custom Financial Solutions",
             description: "Design and operate tailored electronic financial systems built to match your business requirements."

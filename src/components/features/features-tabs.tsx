@@ -4,7 +4,7 @@ import { FeatureDetails } from "@/components/features/feature-details";
 import type { Feature } from "@/components/features/features";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+// import Image from "next/image";
 import { useState } from "react";
 
 type Props = {
@@ -16,7 +16,11 @@ export function FeaturesTabs({ features, className }: Props) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <Tabs className={cn("w-full max-w-6xl", className)} value={activeTab.toString()} onValueChange={(value) => setActiveTab(parseInt(value))}>
+    <Tabs
+      className={cn("w-full max-w-6xl", className)}
+      value={activeTab.toString()}
+      onValueChange={(value) => setActiveTab(parseInt(value))}
+    >
       <TabsList className="grid h-auto w-full grid-cols-4 gap-6">
         {features.map((feature, index) => (
           <TabsTrigger
@@ -30,9 +34,9 @@ export function FeaturesTabs({ features, className }: Props) {
       </TabsList>
       {features.map((feature, index) => (
         <TabsContent key={feature.title} value={index.toString()}>
-          <div className="bg-card flex w-full justify-center rounded-lg border p-8 pb-0">
+          {/* <div className="bg-card flex w-full justify-center rounded-lg border p-8 pb-0">
             <Image src={feature.image} alt="App Image" width={304} height={445} />
-          </div>
+          </div> */}
         </TabsContent>
       ))}
     </Tabs>
